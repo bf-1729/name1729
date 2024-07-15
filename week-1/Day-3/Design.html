@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .demo2{
+            height: 100px;
+            width: 100px;
+            background-color: darkslateblue;
+            animation-name: demo;
+            animation-duration: 7s;
+            
+        }
+        @keyframes demo {
+            0%{background-color:blue;}
+            25%{background-color: burlywood;}
+            40%{background-color: chartreuse;}
+            75%{background-color: darkred;}
+            100%{background-color:coral;}
+        }
+        
+        .demo1{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .demo3{
+            dtransform: skew(45deg);
+            height: 100px;
+            width: 100px;
+            background-color: greenyellow;
+            transition-duration: 7s;
+            transition: transform 1s;
+        }
+        .demo3:hover{
+            transform: rotate(45deg);
+            background-color: brown;
+            transform: scale(1,4);
+        }
+        .demo4{
+            height: 100px;
+            width: 100px;
+            background-color: darkmagenta;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="demo1">
+        <div class="demo2"></div>
+        <div class="demo3"></div>
+        <div class="demo4"></div>
+    </div>
+</body>
+</html>

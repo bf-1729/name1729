@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <style>
+            .demo{
+                width: 100px;
+                height: 100px;
+                background-color: rgb(131, 114, 114);
+                animation-name: example;
+                animation-duration: 4s;
+                position: relative;
+                animation-delay: 1s;
+            }
+            @keyframes example {
+                0% {background-color: rgb(61, 232, 61); top: 0px; left: 0px;}
+                25% {background-color: aquamarine; top: 0px; left: 400px;}
+                60% {background-color: blue; left: 400px; top: 400px;}
+                75% {background-color: brown; top: 400px; left: 0px;}
+                100% {background-color: rgb(255, 127, 127); top: 0px; left: 0px;}
+
+                
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Animation</h1>
+        <div class="demo"></div>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <style>
+            .demo{
+                margin-left: 400px;
+                width: 400px;
+                height: 400px;
+                background-color: aquamarine;
+                transform: translateX(60px);
+                transform: rotate(45deg);
+                transform: scale(0.6,8);
+                /*transform: skew(70deg);*/
+                transition: transform 7s;
+                transition-duration: 3s;
+            }
+            .demo:hover{
+                ftransform: rotate(360deg);
+                transform: scale(1,4);
+                background-color: rgb(55, 220, 33);
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Transform in CSS</h1>
+        <div class="demo">div tags</div>
+    </body>
+</html>
