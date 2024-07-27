@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="demo">
+        <li>Milk</li>
+    </ul>
+    <input type="text" id="page">
+    <button onclick="huge()">Button</button>
+    
+
+    <script>
+        function huge(){
+            const elem = document.createElement("li");
+            const node = document.getElementById("page");
+            elem.appendChild(node);
+
+            document.getElementById("demo").appendChild(elem);
+        }
+    </script>
+    
+</body>
+</html>

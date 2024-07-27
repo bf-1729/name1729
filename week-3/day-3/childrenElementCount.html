@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            background-color: rgb(73, 114, 150);
+        }
+    </style>
+</head>
+<body>
+    <h1>childElementCount</h1>
+    <h1>childNodes</h1>
+    <h1>children</h1>
+    <div id="demo">
+        <p>Places</p>
+        <p>Papers</p>
+        <p>Business</p>
+        <p>Sports</p>
+    </div>
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+    <p id="demo4"></p>
+    <script>
+        let x = document.getElementById("demo").childElementCount;
+        document.getElementById("demo1").innerHTML = x;
+        let l = document.getElementById("demo").childNodes.length;
+        document.getElementById("demo2").innerHTML = l;
+        let y = document.body.children;
+        document.getElementById("demo4").innerHTML = y[1].tagName;
+        
+    </script>
+</body>
+</html>

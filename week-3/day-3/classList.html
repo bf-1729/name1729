@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to List</title>
+    <style>
+        #demo{
+            background: linear-gradient(red,green);
+            text-align: center;
+            margin-top: 200px;
+            margin-left: 400px;
+            width: 600px;
+            height: 200px;
+            border: 1px solid red;
+            text-wrap: wrap;
+        }
+        #input-box {
+            padding: 10px;
+            font-size: 16px;
+        }
+        #add-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #list {
+            text-wrap: wrap;
+            margin-top: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+        #list li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="demo">
+    <h1>Text to List</h1>
+    <input type="text" id="input-box" placeholder="Enter text" required>
+    <button id="add-button">Add to List</button>
+    <ul id="list"></ul></div>
+
+    <script>
+
+
+        document.getElementById('add-button').addEventListener('click', function() {
+            var inputBox = document.getElementById('input-box');
+            var text = inputBox.value.trim();
+            if (text) {
+                var list = document.getElementById('list');
+                var listItem = document.createElement('li');
+                listItem.textContent = text;
+                list.appendChild(listItem);
+                inputBox.value = ''; // Clear the input box
+            }
+        });
+    </script>
+</body>
+</html>

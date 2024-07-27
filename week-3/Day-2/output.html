@@ -9,19 +9,19 @@
     <!-- Sometimes people use innerHTML to retrieve or write text inside an element, but textContent has better performance because its value is not parsed as HTML. Moreover, using textContent can prevent XSS attacks. -->
     <p id="demo"></p>
     <script>
-        // a=3;
-        // b=3;
-        // console.log(a+b);
-        // document.getElementById('demo').textContent="<h1>Hello World</h1>";
+        a=3;
+        b=3;
+        console.log(a+b);
+        document.getElementById('demo').textContent="<h1>Hello World</h1>";
         // alert("Time left is 4m")
         // confirm("Do you want to continue?")
-        // prompt("Enter your name")
-        // if(confirm("Do you want to continue")){
-        //     document.getElementById('demo').innerHTML="You have pressed ok button";
-        // }
-        // else{
-        //     document.getElementById('demo').innerHTML="you have pressed cancel button";
-        // }
+        prompt("Enter your name")
+        if(confirm("Do you want to continue")){
+            document.getElementById('demo').innerHTML="You have pressed ok button";
+        }
+        else{
+            document.getElementById('demo').innerHTML="you have pressed cancel button";
+        }
         // let name=prompt("enter name of college")
         // if(name){
         //     document.getElementById('demo').innerHTML="welcome",$(name)
@@ -31,8 +31,9 @@
         // }
         // let name = (a,b) => a*b;
         // document.getElementById('demo').innerHTML = name(76,19);
-        a = (val,val1) => val*val1
-        document.getElementById('demo').innerHTML = a(78,67);
+        // a = (val,val1) => val*val1
+        // document.getElementById('demo').innerHTML = a(78,67);
+        // console.log("demo");
     </script> 
 </body>
 </html>

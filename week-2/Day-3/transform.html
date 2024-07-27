@@ -1,27 +1,169 @@
 <html>
     <head>
-        <style>
-            .demo{
-                margin-left: 400px;
-                width: 400px;
-                height: 400px;
-                background-color: aquamarine;
-                transform: translateX(60px);
-                transform: rotate(45deg);
-                transform: scale(0.6,8);
-                /*transform: skew(70deg);*/
-                transition: transform 7s;
-                transition-duration: 3s;
-            }
-            .demo:hover{
-                ftransform: rotate(360deg);
-                transform: scale(1,4);
-                background-color: rgb(55, 220, 33);
-            }
-        </style>
+        
     </head>
     <body>
-        <h1>Transform in CSS</h1>
-        <div class="demo">div tags</div>
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+font-family: Arial, sans-serif;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+background-color: #f0f0f0;
+}
+
+.container {
+background-color: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+width: 300px;
+text-align: center;
+}
+
+h1 {
+color: #333;
+}
+
+form {
+margin-bottom: 20px;
+}
+
+input[type="text"] {
+width: 60%;
+padding: 8px;
+margin-right: 10px;
+border: 1px solid #ccc;
+border-radius: 4px;
+}
+
+button {
+padding: 8px 16px;
+background-color: #4CAF50;
+color: white;
+border: none;
+cursor: pointer;
+border-radius: 4px;
+}
+
+button:hover {
+background-color: #45a049;
+}
+
+ul {
+list-style-type: none;
+padding: 0;
+}
+
+li {
+margin-bottom: 8px;
+}
+
+.delete-button {
+background-color: #f44336;
+color: white;
+border: none;
+padding: 4px 8px;
+cursor: pointer;
+border-radius: 4px;
+}
+
+.delete-button:hover {
+background-color: #e53935;
+}
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <form id="todo-form">
+            <input type="text" id="todo-input" placeholder="Add a new task">
+            <button type="submit">Add</button>
+        </form>
+        <ul id="todo-list"></ul>
+    </div>
+    <script src="script.js">
+        const todoForm = document.getElementById('todo-form');
+const todoInput = document.getElementById('todo-input');
+const todoList = document.getElementById('todo-list');
+
+// Load tasks from local storage on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks.forEach(task => {
+        createTodoItem(task.text, task.completed);
+    });
+});
+
+// Add event listener to form submission
+todoForm.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+    const todoText = todoInput.value.trim(); // Trim any leading or trailing whitespace
+
+    if (todoText !== '') {
+        createTodoItem(todoText, false);
+        saveTasksToLocalStorage(); // Save tasks to local storage
+        todoInput.value = ''; // Clear input field
+    }
+});
+
+// Function to create a new todo item
+function createTodoItem(todoText, completed) {
+    // Create new list item
+    const todoItem = document.createElement('li');
+    todoItem.textContent = todoText;
+    todoItem.classList.add('todo-item');
+    
+    // Add a checkbox to mark task as completed
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = completed;
+    checkbox.addEventListener('change', function() {
+        todoItem.classList.toggle('completed', checkbox.checked);
+        saveTasksToLocalStorage(); // Update local storage on completion status change
+    });
+    todoItem.appendChild(checkbox);
+
+    // Create delete button for the list item
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.className = 'delete-button';
+    deleteButton.addEventListener('click', function() {
+        todoItem.remove(); // Remove the list item
+        saveTasksToLocalStorage(); // Update local storage on deletion
+    });
+    todoItem.appendChild(deleteButton);
+
+    // Append list item to the list
+    todoList.appendChild(todoItem);
+}
+
+// Function to save tasks to local storage
+function saveTasksToLocalStorage() {
+    const tasks = [];
+    const todoItems = document.querySelectorAll('.todo-item');
+    todoItems.forEach(item => {
+        tasks.push({
+            text: item.textContent,
+            completed: item.classList.contains('completed')
+        });
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+    </script>
+</body>
+</html>
+
     </body>
 </html>
