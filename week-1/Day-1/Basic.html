@@ -1,22 +1,154 @@
-<html>
-    <head>
-        <style>
-            img{
-                background-image: 100% 100%;
-            }
-        </style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 150px;
+            height: 100vh;
+            background: linear-gradient(45deg,rgb(53, 79, 79),rgb(67, 98, 90),rgb(8, 186, 130));
+        }
+        .container {
+            border-radius: 1%;
+            box-shadow: 0 0 6px rgb(31, 27, 27);
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            background: linear-gradient(rgb(85, 135, 162),rgb(150, 107, 150));
+        }
+        input{
+            width: 240px;
+            padding: 10px;
+            margin: 10px;
+        }
+        button{
+            box-shadow: 0 0 6px black;
+            color: #4217ee;
+            background-color: rgb(231, 184, 15);
+        }
+        ul {
+            list-style-type:disc;
+            padding: 0;
+        }
+        h1{
+            color: #e5f106;
+        }
+        li {
+            margin-left: 60px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color:lime;
+        }
+        button {
+            padding: 10px 10px;
+            margin-left: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 3px;
+        }
+        button:hover{
+            opacity: 0.8;
+        }
+        .incomplete-btn {
+            background-color: #f8061e;
+            color: white;
+        }
+        .complete-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        .remove-btn {
+            background-color: #f106d6;
+            color: white;
+        }
+        .progress-container {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #3328a7;
+        }
+        progress {
+            width: 100%;
+            height: 4px;
+            appearance: none;
+        }
+        progress::-webkit-progress-bar {
+            background-color: #eee;
+            border-radius: 5px;
+        }
+        progress::-webkit-progress-value {
+            background-color: #f60909;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="progress-container">
+            <label for="progressBar">Progress bar</label>
+            <progress id="progressBar" value="0" max="100"></progress>
+        </div>
+        <h1>To-Do List</h1>
+        <input type="text" id="taskInput" placeholder="Add a new task">
+        <button onclick="addTask()">Add a Task</button>
+        <ul id="taskList"></ul>
+    </div>
 
-    </head>
-    <body>
-        <pre>
-            Hello students,
-                whom is written.
-        </pre>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus veniam doloribus, dolorum doloremque quidem eaque quisquam rem nulla aperiam debitis voluptatem assumenda modi aliquam nemo, earum ducimus sequi, tempora molestias?</p>
-        <hr>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos vel voluptatum voluptate fugiat? Eos repellat magni voluptates fuga magnam. Ipsum maxime, accusamus similique suscipit unde, distinctio officia recusandae porro hic, exercitationem dignissimos ab! Cum et quasi in ullam iure animi impedit ducimus neque placeat laboriosam iste cumque minus, cupiditate officia deserunt tenetur sint, fuga eos itaque expedita! Sunt, quaerat. Tempore, modi at quidem officiis excepturi, nulla ullam ipsam eaque fugiat maiores soluta quis id nemo debitis totam iusto molestias nostrum consectetur vitae facere sunt aspernatur incidunt suscipit eius? Sint vero id laboriosam natus voluptatibus. Eius quasi, iste architecto pariatur commodi explicabo sed, ex molestiae facilis quo quia repellat eveniet dolorum officia expedita laboriosam id nam amet quaerat necessitatibus veritatis nemo! Iste suscipit voluptatum, neque nesciunt id illo vel! Libero quasi eos aut tempora dolorum, minus iusto aspernatur fugiat suscipit, obcaecati perspiciatis. Explicabo blanditiis, expedita asperiores incidunt voluptates nihil delectus natus velit alias reprehenderit quibusdam molestias modi mollitia iusto ipsum accusamus animi dolorum error dolor autem repudiandae. Quasi, architecto iure sapiente perferendis quod ab veniam asperiores recusandae quibusdam quas pariatur aliquid veritatis soluta, ex consectetur commodi voluptatem blanditiis temporibus totam! Blanditiis optio accusamus minus odit aperiam atque inventore perferendis dolores dicta mollitia eaque aliquam ad minima laudantium pariatur quas vel esse nesciunt eveniet nemo eligendi, doloremque neque eum harum. Cum dicta nostrum, cumque iure nisi praesentium facilis odio consequatur asperiores, sint voluptatem commodi. Deserunt, quisquam. Necessitatibus accusamus, quisquam suscipit omnis officiis repellat harum? Repudiandae quas alias tenetur praesentium vero esse, accusamus maxime cupiditate reiciendis, exercitationem delectus perspiciatis tempore harum consequuntur nulla eius at eaque est expedita voluptatibus quod illo earum optio vel. Pariatur, rerum. Voluptatum odit quos cum corrupti enim inventore repellat in, excepturi eaque veniam dignissimos iste voluptatibus fugit tempore sit. Repellendus officia tenetur recusandae ipsa repudiandae, sit deserunt suscipit?</p>
-        <h4>😘Happybirthday</h4>
-        <link rel="demo" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_we3vni2cmerMo9kqn6JeZWuh2NRs36PDCw&s">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_we3vni2cmerMo9kqn6JeZWuh2NRs36PDCw&s" onerror="this.onerror=null;this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMRMvVayGNkM4xGvkOspFKexlqXUryLWhjmA&s' " alt="picture">
-    </body>
+    <script>
+        let tasks = [];
+
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskText = taskInput.value.trim();
+            if (taskText) {
+                tasks.push({ text: taskText, completed: false });
+                taskInput.value = '';
+                renderTasks();
+            }
+            else{
+                alert("Enter atleast one Task to add");
+            }
+        }
+
+        function renderTasks() {
+            const taskList = document.getElementById('taskList');
+            taskList.innerHTML = '';
+            tasks.forEach((task, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${task.text}</span>
+                    <div>
+                        <button class="${task.completed ? 'complete-btn' : 'incomplete-btn'}" onclick="toggleTask(${index})">
+                            ${task.completed ? 'Completed' : 'Incomplete'}
+                        </button>
+                        <button class="remove-btn" onclick="deleteTask(${index})">Remove</button>
+                    </div>
+                `;
+                taskList.appendChild(li);
+            });
+            updateProgress();
+        }
+
+        function toggleTask(index) {
+            tasks[index].completed = !tasks[index].completed;
+            renderTasks();
+        }
+
+        function deleteTask(index) {
+            tasks.splice(index, 1);
+            renderTasks();
+        }
+
+        function updateProgress() {
+            const completedTasks = tasks.filter(task => task.completed).length;
+            const progress = tasks.length ? (completedTasks / tasks.length) * 100 : 0;
+            document.getElementById('progressBar').value = progress;
+        }
+    </script>
+</body>
 </html>

@@ -36,7 +36,17 @@
 //     return "this is return function"
 // }
 // console.log(a());
-a = () =>{
-    return "this is last function"
-}
-console.log(a());
+
+// a = () =>{
+//     return "this is last function"
+// }
+// console.log(a());
+
+// const vals = (a,b) => {
+//     console.log(a,b);
+// }
+// vals(56,45);
+
+// ((a,b) => {
+//     console.log(a,b);
+// })(67,45)

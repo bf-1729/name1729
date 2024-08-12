@@ -1,20 +1,251 @@
-<html>
-    <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Appointment Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h2{
+            color: rgb(173, 57, 156);
+        }
 
-    </head>
-    <body>
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            text-align: center;
+            color: #086e90;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        h1{
+            color: #007BFF;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        
+        button:hover {
+            opacity: 0.7;
+        }
+
+        #appointments-list, #doctors-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #appointments-list li, .doctor-card {
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button{
+            background-color: green;
+            color: white;
+        }
+        #cancel-appointment{
+            background-color: red;
+        }
+        #view-appointments{
+            background-color: blue;
+        }
+
+        .doctor-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slot-booked {
+            color: red;
+            font-weight: bold;
+        }
+
+        .slot-available {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
         <header>
-            <center><h1>Web Development</h1></center>
+            <h1>Doctor Appointment Booking</h1>
         </header>
-        <p>By <b>55,000</b> years ago, the first modern humans, or Homo sapiens, 
-            had arrived on the Indian subcontinent from Africa, where they had earlier evolved.[28][29][30] 
-            The earliest known modern human remains in <strong>South Asia</strong> date to about 30,000 years ago.[28] After 6500 BCE, evidence for domestication of food crops and animals, 
-            construction of permanent structures, and storage of agricultural surplus appeared in Mehrgarh and other sites in Balochistan, Pakistan.[84] 
-            <br>These gradually developed into the <mark>Indus Valley Civilisation</mark>,[85][84] the first urban culture in South Asia,[86] which flourished during 2500–1900 BCE in Pakistan and western India.[87] 
-            Centred around cities such as Mohenjo-daro, <strike>Harappa</strike>, Dholavira, and Kalibangan, and relying on varied forms of subsistence, the civilisation engaged robustly in crafts production and wide-ranging trade.[86]
-        </p>
-        <div style="background-color: lawngreen;">Programs</div>
-        <span style="background-color: rgb(26, 90, 147);">Indias</span>
-        <span>Geography</span>
-    </body>
+        <section id="booking-section">
+            <h2>Book an Appointment</h2>
+            <form id="booking-form">
+                <input type="text" id="patient-name" placeholder="Patient Name" required>
+                <select id="doctor-select" required>
+                    <option value="" disabled selected>Select Doctor</option>
+                </select>
+                <input type="date" id="appointment-date" required>
+                <input type="time" id="appointment-time" required>
+                <button type="submit">Book Appointment</button>
+            </form>
+        </section>
+        <section id="cancellation-section">
+            <h2>Cancel an Appointment</h2>
+            <input type="text" id="appointment-id" placeholder="Appointment ID" required>
+            <button id="cancel-appointment">Cancel Appointment</button>
+        </section>
+        <section id="view-appointments-section">
+            <h2>View All Appointments</h2>
+            <button id="view-appointments">View Appointments</button>
+            <ul id="appointments-list"></ul>
+        </section>
+        <section id="doctors-section">
+            <h2>Available Doctors</h2>
+            <div id="doctors-list"></div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const doctors = [
+                { name: "Dr. Robert Downey - Dentist", slots: ["09:00,", "10:00,", "11:00,", "18:00,", "19:00,","20:00"], booked: [] },
+                { name: "Dr. Chris Evans - Cardiologist", slots: ["10:00,", "11:00,", "13:00,", "14:00"], booked: [] },
+                { name: "Dr. Chris Hemsworth - Neurologist", slots: ["09:00,", "10:00"], booked: [] },
+                { name: "Dr. Scharlett Johansson - Gynaecologist", slots: ["09:00,", "10:00,", "11:00,", "12:00,","13:00,","14:00,","15:00,","16:00"], booked: [] },
+            ];
+
+            const appointments = [];
+
+            const doctorSelect = document.getElementById("doctor-select");
+            const doctorList = document.getElementById("doctors-list");
+            const appointmentsList = document.getElementById("appointments-list");
+
+            // Populate Doctor Selection
+            doctors.forEach((doctor, index) => {
+                const option = document.createElement("option");
+                option.value = index;
+                option.textContent = doctor.name;
+                doctorSelect.appendChild(option);
+            });
+
+            // Display Doctor Information
+            function displayDoctors() {
+                doctorList.innerHTML = "";
+                doctors.forEach((doctor, index) => {
+                    const doctorCard = document.createElement("div");
+                    doctorCard.classList.add("doctor-card");
+
+                    const doctorInfo = document.createElement("div");
+                    doctorInfo.textContent = `${doctor.name} - Total Slots: ${doctor.slots.length}`;
+
+                    const slotsInfo = document.createElement("div");
+                    doctor.slots.forEach(slot => {
+                        const span = document.createElement("span");
+                        span.textContent = slot;
+                        span.className = doctor.booked.includes(slot) ? "slot-booked" : "slot-available";
+                        slotsInfo.appendChild(span);
+                    });
+
+                    doctorCard.appendChild(doctorInfo);
+                    doctorCard.appendChild(slotsInfo);
+                    doctorList.appendChild(doctorCard);
+                });
+            }
+
+            displayDoctors();
+
+            // Handle Booking
+            document.getElementById("booking-form").addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const patientName = document.getElementById("patient-name").value;
+                const doctorIndex = doctorSelect.value;
+                const appointmentDate = document.getElementById("appointment-date").value;
+                const appointmentTime = document.getElementById("appointment-time").value;
+
+                if (!patientName || !doctorIndex || !appointmentDate || !appointmentTime) {
+                    alert("Please fill all the fields.");
+                    return;
+                }
+
+                const doctor = doctors[doctorIndex];
+
+                if (!doctor.slots.includes(appointmentTime) || doctor.booked.includes(appointmentTime)) {
+                    alert("Selected time slot is not available.");
+                    return;
+                }
+
+                const appointmentId = `APT-${appointments.length + 1}`;
+                appointments.push({
+                    id: appointmentId,
+                    patientName,
+                    doctorName: doctor.name,
+                    date: appointmentDate,
+                    time: appointmentTime,
+                });
+
+                doctor.booked.push(appointmentTime);
+
+                alert(`Appointment booked successfully! Your Appointment ID is ${appointmentId}`);
+
+                displayDoctors();
+                displayAppointments();
+            });
+
+            // Handle Viewing Appointments
+            document.getElementById("view-appointments").addEventListener("click", () => {
+                displayAppointments();
+            });
+
+            function displayAppointments() {
+                appointmentsList.innerHTML = "";
+                appointments.forEach(appointment => {
+                    const li = document.createElement("li");
+                    li.textContent = `ID: ${appointment.id}, Patient: ${appointment.patientName}, Doctor: ${appointment.doctorName}, Date: ${appointment.date}, Time: ${appointment.time}`;
+                    appointmentsList.appendChild(li);
+                });
+            }
+
+            // Handle Cancellation
+            document.getElementById("cancel-appointment").addEventListener("click", () => {
+                const appointmentId = document.getElementById("appointment-id").value;
+                const appointmentIndex = appointments.findIndex(appt => appt.id === appointmentId);
+
+                if (appointmentIndex === -1) {
+                    alert("Invalid Appointment ID.");
+                    return;
+                }
+
+                const appointment = appointments[appointmentIndex];
+                const doctorIndex = doctors.findIndex(doc => doc.name === appointment.doctorName);
+                doctors[doctorIndex].booked = doctors[doctorIndex].booked.filter(slot => slot !== appointment.time);
+
+                appointments.splice(appointmentIndex, 1);
+
+                alert("Appointment canceled successfully!");
+
+                displayDoctors();
+                displayAppointments();
+            });
+        });
+    </script>
+</body>
 </html>

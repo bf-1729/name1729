@@ -1,11 +1,11 @@
-// function show(){
-//     console.log("Hello World");
-// }
-// function display(show){
-//     console.log("display function");
-//     show();
-// }
-// display(show);
+function show(){
+    console.log("Hello World");
+}
+function display(show){
+    console.log("display function");
+    show();
+}
+display(show);
 
 addition(8,function(addres){
     subtraction(addres,function(subres){
